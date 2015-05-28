@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+ <bean id="allObjectsAction" class="com.blues.hades.database.oracle.action.AllObjectsAction">
+  <property name="service">
+    <ref bean="allObjectsService"/>
+  </property>
+ </bean>
+ <bean id="allObjectsService" class="com.blues.hades.database.oracle.service.AllObjectsServiceImpl" scope="singleton">
+  <property name="dao">
+    <ref bean="allObjectsDao"/>
+  </property>
+ </bean>
+  <bean id="allObjectsDao" class="com.blues.hades.database.oracle.dao.AllObjectsDaoImpl" scope="singleton">
+  <property name="sqlMapClient">
+    <ref bean="uatOracleMapClient"/>
+  </property>
+ </bean>
+</beans>

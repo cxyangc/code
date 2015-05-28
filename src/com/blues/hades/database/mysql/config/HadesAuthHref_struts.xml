@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<action name="HadesAuthHref_*_*" class="hadesAuthHref" method="{1}">
+ 	<result name="success">/jsp/management/database/{2}.jsp</result>
+</action>

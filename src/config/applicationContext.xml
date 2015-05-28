@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+           http://www.springframework.org/schema/context 
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd    
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd   
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+           http://www.springframework.org/schema/jee
+           http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+    <!-- 得到databaseSource.properties中的数据库配置 -->
+    <bean id="databaseConfiguration"      
+         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+         <property name="location" value="/WEB-INF/classes/properties/databaseSource.properties"/> 
+         <property name="fileEncoding" value="utf-8" />      
+	</bean>
+	<!-- dbcp数据源定义 -->
+	<bean id="sysDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${${jdbc}.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${${jdbc}.url}</value>
+		</property>
+		<property name="username">
+			<value>${${jdbc}.username}</value>
+		</property>
+		<property name="password">
+			<value>${${jdbc}.password}</value>
+		</property>
+	</bean>
+	<!-- ibatis定义 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref bean="sysDataSource"/>
+		</property>
+		<property name="configLocations">
+			<list>
+				<value>/WEB-INF/classes/config/sqlMapConfig.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- mysqlDataSource数据源定义 -->
+	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${mysql.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${mysql.url}</value>
+		</property>
+		<property name="username">
+			<value>${mysql.username}</value>
+		</property>
+		<property name="password">
+			<value>${mysql.password}</value>
+		</property>
+	</bean>
+	<bean id="mysqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref bean="mysqlDataSource"/>
+		</property>
+		<property name="configLocations">
+			<list>
+				<value>/WEB-INF/classes/config/sqlMapConfig.xml</value>
+			</list>
+		</property>
+	</bean>
+	<!-- oracle uat数据源定义 -->
+	<bean id="uatOracleDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${oracle.uat.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${oracle.uat.url}</value>
+		</property>
+		<property name="username">
+			<value>${oracle.uat.username}</value>
+		</property>
+		<property name="password">
+			<value>${oracle.uat.password}</value>
+		</property>
+	</bean>
+	<bean id="uatOracleMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource">
+			<ref bean="uatOracleDataSource"/>
+		</property>
+		<property name="configLocations">
+			<list>
+				<value>/WEB-INF/classes/config/sqlMapConfig.xml</value>
+			</list>
+		</property>
+	</bean>
+	<import resource="../com/blues/hades/database/mysql/config/HadesAuthHref_spring.xml"/>
+	<import resource="../com/blues/hades/database/oracle/config/AllObjects_spring.xml"/>
+</beans>

@@ -1,0 +1,59 @@
+/**
+* 系统的背景颜色#E1F3FD
+*/ 
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-left: 1px solid #888;
+	border-top: 1px solid #888;
+	background: #efefef;
+	margin:5px;
+}
+
+th, td {
+	border-right: 1px solid #888;
+	border-bottom: 1px solid #888;
+	padding: 5px 15px;
+}
+
+th {
+	font-weight: bold;
+	background: #ccc;
+}
+tfoot{
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-left: 0px solid #888;
+	border-top: 0px solid #888;
+	border-right: 0px solid #888;
+	border-bottom: 0px solid #888;
+	background: #efefef;
+	
+}
+table tr:hover{
+	background:#CCFFCC;
+    color:   #000000;
+}
+ol li:hover{
+	background:#c0c0c0;
+    color:   #000000;
+}
+ol li.visited{
+	background:#c0c0c0;
+}
+ol li.link{
+	background:#E1F3FD;
+}
+ol li.link:hover{
+	background:#c0c0c0;
+}
+input.readonly{
+	background: #e3e3e3;
+}
+input[type='button']{
+	background:#ffffff;
+    color:   #000000;
+    margin-left:5px;
+    cursor:pointer;
+    padding:1px;
+}

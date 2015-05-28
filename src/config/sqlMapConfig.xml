@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings useStatementNamespaces="true" />
+	<sqlMap resource="com/blues/hades/database/mysql/dao/HadesAuthHrefSqlMap.xml"/>
+	<sqlMap resource="com/blues/hades/database/oracle/dao/AllObjectsSqlMap.xml"/>
+	<!-- 权限分配用户DAO -->
+	<!-- 
+	<sqlMap resource="com/work/framework/Dao/DaoImpl/HadesAuthUserDaoSqlMap.xml" />
+	<sqlMap resource="com/work/humanManagement/dao/ibatis/EhrbaseEmpPhotosSqlMap.xml" />
+	<sqlMap resource="com/work/logs/dao/EhrLoginLogsSqlMap.xml" />
+	<sqlMap resource="com/oshr/hades/Dao/HadesAuthUserDaoSqlMap.xml" />
+	<sqlMap resource="com/system/all_objects/Dao/AllObjectsDaoSqlMap.xml" />
+	 -->
+</sqlMapConfig>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd"[
+    
+    <!ENTITY HadesAuthHref_struts SYSTEM "../com/blues/hades/database/mysql/config/HadesAuthHref_struts.xml">
+    <!ENTITY AllObjects_struts SYSTEM "../com/blues/hades/database/oracle/config/AllObjects_struts.xml">
+    ]>
+
+<struts>
+	<!-- 该属性指定Struts 2中的action由Spring容器创建  --> 
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 该属性控制struts2上传文件的大小  --> 
+    <constant name="struts.multipart.maxSize" value="100000000"/> 
+    <package name="default" namespace="/" extends="struts-default">
+    	&HadesAuthHref_struts;&AllObjects_struts;
+        
+    </package>
+</struts>

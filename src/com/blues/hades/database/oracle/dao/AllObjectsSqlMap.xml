@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd"> 
+<sqlMap namespace="allObjectsDao">
+ <select id="clear_all_model_cache" parameterClass="java.util.HashMap"  resultClass="java.util.HashMap">
+ 	<![CDATA[
+ 		SELECT 1 FROM DUAL
+ 	]]>
+ </select>
+ <cacheModel type="MEMORY" id="model_cache">
+ 	<flushInterval hours="24"/>
+ 	<flushOnExecute statement="allObjectsDao.clear_all_model_cache"/>
+ 	<property name="size" value="100000"/>
+ </cacheModel>
+ <select id="selectAllObjects" parameterClass="java.util.HashMap" resultClass="java.util.HashMap" cacheModel="model_cache">
+  <![CDATA[
+   	select ROWNUM,t.* from all_objects t where 1=1 and t.OBJECT_NAME NOT LIKE '%+%' AND t.OBJECT_NAME NOT LIKE '%=%'
+  ]]>
+  <isNotEmpty prepend='and' property='OBJECT_TYPE'>
+      t.OBJECT_TYPE like #OBJECT_TYPE#
+  </isNotEmpty>
+  <isNotEmpty prepend='and' property='OWNER'>
+      t.OWNER like #OWNER#
+  </isNotEmpty>
+  <![CDATA[
+  	ORDER BY T.OBJECT_NAME
+  ]]>
+ </select> 
+ <select id="selectColumnsByTableName" parameterClass="java.util.HashMap" resultClass="java.lang.String">
+ 	<![CDATA[
+ 	SELECT T.COLUMN_NAME FROM ALL_TAB_COLUMNS T WHERE 1=1
+ 	]]>
+ 	<isNotEmpty prepend="AND" property="tableName">
+ 		T.TABLE_NAME=UPPER(#tableName#)
+ 	</isNotEmpty>
+ </select>
+ <select id="selectTableByTableName" parameterClass="java.util.HashMap" resultClass="java.util.HashMap"  remapResults="true">
+ 	SELECT 
+	<isNotEmpty property="sysCountSum">
+	count(1) COUNT,CEIL(COUNT(1)/#max#) CEIL
+	</isNotEmpty>
+	<isEmpty property="sysCountSum">
+	 *
+	</isEmpty>
+ 	FROM $tableName$ T
+ </select>
+
+</sqlMap>

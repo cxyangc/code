@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<bean id="hadesAuthHref" class="com.blues.hades.database.mysql.action.HadesAuthHref">
+		<property name="service">
+			<ref bean="hadesAuthHrefService" />
+		</property>
+	</bean>
+	<bean id="hadesAuthHrefService" class="com.blues.hades.database.mysql.service.HadesAuthHrefServiceImpl" scope="singleton">
+		<property name="dao">
+			<ref bean="hadesAuthHrefDao" />
+		</property>
+	</bean>
+	<bean id="hadesAuthHrefDao"
+		class="com.blues.hades.database.mysql.dao.HadesAuthHrefDaoImpl"
+		scope="singleton">
+		<property name="sqlMapClient">
+			<ref bean="mysqlMapClient" />
+		</property>
+	</bean>
+</beans>
