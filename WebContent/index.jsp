@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	var contextPath = '<%=request.getContextPath()%>';
 
-	$(function(){
+	$(function(){ 
 		$.ajax({
 		     url:"<%=request.getContextPath() %>/HadesAuthHref_selectHrefInfo_3",
 		     type:"post",
